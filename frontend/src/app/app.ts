@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { JsonPipe } from '@angular/common';
 
@@ -7,12 +7,13 @@ import { JsonPipe } from '@angular/common';
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class App {
+export class AppComponent {
   protected title = 'frontend';
-  protected healthData = signal<Record<string, unknown> | null>(null);
-  protected loading = signal(false);
-  protected error = signal<string | null>(null);
+  protected readonly healthData = signal<Record<string, unknown> | null>(null);
+  protected readonly loading = signal(false);
+  protected readonly error = signal<string | null>(null);
 
   async checkHealth(): Promise<void> {
     this.loading.set(true);
