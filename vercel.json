@@ -1,17 +1,8 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "dist/frontend/browser/**",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "api/index.ts",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    { "src": "/api/(.*)", "dest": "/api/index.ts" },
-    { "src": "/(.*)", "dest": "/dist/frontend/browser/$1" }
+  "buildCommand": "bunx nx build frontend --configuration=production",
+  "outputDirectory": "dist/frontend/browser",
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/index.ts" }
   ]
 }

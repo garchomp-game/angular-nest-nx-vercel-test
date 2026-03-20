@@ -1,0 +1,14 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "module": "commonjs",
+    "target": "es2021",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "types": ["node"]
+  },
+  "include": ["./**/*.ts", "../backend/src/**/*.ts"],
+  "exclude": ["../backend/src/**/*.spec.ts", "../backend/src/**/*.test.ts"]
+}
