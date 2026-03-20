@@ -24,11 +24,22 @@ export default [
           style: 'kebab-case',
         },
       ],
+      // --- 静的デバッグ強化ルール ---
+      '@angular-eslint/use-lifecycle-interface': 'error',
+      '@angular-eslint/no-empty-lifecycle-method': 'warn',
+      '@angular-eslint/prefer-on-push-component-change-detection': 'warn',
     },
   },
   {
     files: ['**/*.html'],
-    // Override or add rules here
-    rules: {},
+    rules: {
+      // --- テンプレート型安全性ルール ---
+      '@angular-eslint/template/no-any': 'error',
+      '@angular-eslint/template/no-negated-async': 'error',
+      '@angular-eslint/template/no-duplicate-attributes': 'error',
+      '@angular-eslint/template/no-interpolation-in-attributes': 'error',
+      '@angular-eslint/template/use-track-by-function': 'warn',
+      '@angular-eslint/template/prefer-self-closing-tags': 'warn',
+    },
   },
 ];
