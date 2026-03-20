@@ -26,10 +26,42 @@
           <p class="py-6">
             Nx + Angular + NestJS monorepo with Tailwind v4 and daisyUI.
           </p>
-          <button class="btn btn-primary">Get Started</button>
+          <button
+            class="btn btn-primary"
+            (click)="checkHealth()"
+            [disabled]="loading()"
+          >
+            @if (loading()) {
+              <span class="loading loading-spinner loading-sm"></span>
+              Checking...
+            } @else {
+              🔌 Check Backend
+            }
+          </button>
         </div>
       </div>
     </div>
+
+    <!-- Health Check Result -->
+    @if (healthData()) {
+      <div class="card bg-base-100 shadow-md mt-6">
+        <div class="card-body">
+          <h2 class="card-title text-success">✅ Backend Connected!</h2>
+          <div class="overflow-x-auto">
+            <pre class="bg-base-200 p-4 rounded-lg text-sm">{{ healthData() | json }}</pre>
+          </div>
+        </div>
+      </div>
+    }
+
+    @if (error()) {
+      <div class="alert alert-error mt-6">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>{{ error() }}</span>
+      </div>
+    }
 
     <!-- Router Outlet -->
     <div class="mt-6">

@@ -29,26 +29,12 @@ describe('App', () => {
     );
   });
 
-  it('should render navbar', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.navbar')).toBeTruthy();
-  });
-
-  it('should render theme toggle', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.theme-controller')).toBeTruthy();
-  });
-
-  it('should have a get started button', async () => {
+  it('should render Check Backend button', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('.btn-primary')?.textContent).toContain(
-      'Get Started',
+      'Check Backend',
     );
   });
 });

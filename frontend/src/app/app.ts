@@ -1,12 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { JsonPipe } from '@angular/common';
 
 @Component({
-  imports: [RouterModule],
+  imports: [RouterModule, JsonPipe],
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
 export class App {
   protected title = 'frontend';
+  protected healthData = signal<Record<string, unknown> | null>(null);
+  protected loading = signal(false);
+  protected error = signal<string | null>(null);
+
+  async checkHealth(): Promise<void> {
+    this.loading.set(true);
+    this.error.set(null);
+    this.healthData.set(null);
+
+    try {
+      const res = await fetch('/api/health');
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+      }
+      const data = await res.json();
+      this.healthData.set(data?.data ?? data);
+    } catch (e) {
+      this.error.set(e instanceof Error ? e.message : 'Unknown error');
+    } finally {
+      this.loading.set(false);
+    }
+  }
 }
